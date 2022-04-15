@@ -1,3 +1,7 @@
+export interface IModal {
+    isOpen: boolean
+};
+
 export interface IItem {
     id: string,
     title: string,
