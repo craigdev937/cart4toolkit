@@ -1,6 +1,6 @@
 import { useAppDispatch } from "../global/Hooks";
-import { closeModal } from "../global/ModalSlice";
-import { clearCart } from "../global/CartSlice";
+import { ModalActions } from "../global/ModalSlice";
+import { CartActions } from "../global/CartSlice";
 
 export const Modal = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -13,8 +13,8 @@ export const Modal = (): JSX.Element => {
                         type="button"
                         className="btn confirm-btn"
                         onClick={() => {
-                            dispatch(clearCart());
-                            dispatch(closeModal());
+                            dispatch(CartActions.clearCart());
+                            dispatch(ModalActions.closeModal());
                         }}
                         >confirm
                     </button>
@@ -22,7 +22,7 @@ export const Modal = (): JSX.Element => {
                         type="button"
                         className="btn clear-btn"
                         onClick={() => {
-                            dispatch(closeModal());
+                            dispatch(ModalActions.closeModal());
                         }}
                     >cancel
                     </button>
