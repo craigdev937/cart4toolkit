@@ -14,7 +14,7 @@ export interface ICartState {
     cartItems: IItem[],
     amount: number,
     total: number,
-    isLoading: false,
+    isLoading: boolean,
     error: string | null
 };
 
