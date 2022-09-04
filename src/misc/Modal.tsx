@@ -1,10 +1,11 @@
+import ReactDOM from "react-dom";
 import { useAppDispatch } from "../global/Hooks";
 import { ModalActions } from "../global/ModalSlice";
 import { CartActions } from "../global/CartSlice";
 
-export const Modal = (): JSX.Element => {
+export const Modal = (): React.ReactPortal => {
     const dispatch = useAppDispatch();
-    return (
+    return ReactDOM.createPortal(
         <main className="modal-container">
             <aside className="modal">
                 <h4>Remove items from cart</h4>
@@ -28,7 +29,8 @@ export const Modal = (): JSX.Element => {
                     </button>
                 </section>
             </aside>
-        </main>
+        </main>,
+        document.getElementById("modal")!
     );
 };
 

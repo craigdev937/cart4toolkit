@@ -5,17 +5,17 @@ import { IItem, ICartState } from "../types/Interfaces";
 const URL = "https://course-api.com/react-useReducer-cart-project";
 
 export const getCartItems = 
-createAsyncThunk("cart/getCartItems", 
+createAsyncThunk<IItem[]>("cart/getCartItems", 
 async () => {
     const res: Response = await fetch(URL);
     if (!res.ok) new Error(res.statusText);
-    const cart: IItem[] = await res.json();
-    return [...cart];
+    const data: IItem[] = await res.json();
+    return [...data];
 });
 
 const initialState: ICartState = {
     cartItems: [],
-    amount: 0,
+    amount: 4,
     total: 0,
     isLoading: false,
     error: null
@@ -28,19 +28,21 @@ const CartSlice = createSlice({
         clearCart: (state) => {
             state.cartItems = []
         },
-        removeItem: (state, action: PayloadAction<IItem>) => {
-            const itemId = action.payload;
+        removeItem: (state, action: PayloadAction<string>) => {
+            const id = action.payload;
             state.cartItems = state.cartItems.filter(
-                (item) => item.id !== itemId.id);
+                (item) => item.id !== id);
         },
-        decrease: (state, action: PayloadAction<IItem>) => {
+        decrease: (state, action: PayloadAction<string>) => {
+            const id = action.payload;
             const cartItem = state.cartItems.find(
-                (item) => item.id === action.payload.id);
+                (item) => item.id === id);
             cartItem!.amount = cartItem!.amount - 1;
         },
-        increase: (state, action: PayloadAction<IItem>) => {
+        increase: (state, action: PayloadAction<string>) => {
+            const id = action.payload;
             const cartItem = state.cartItems.find(
-                (item) => item.id === action.payload.id);
+                (item) => item.id === id);
             cartItem!.amount = cartItem!.amount + 1;
         },
         calculateTotals: (state) => {
@@ -48,7 +50,7 @@ const CartSlice = createSlice({
             let total = 0;
             state.cartItems.forEach((item) => {
                 amount += item.amount;
-                (total += item.amount) * parseInt(item.price);
+                (total += item.amount) * (parseInt(item.price));
             });
             state.amount = amount;
             state.total = total;
