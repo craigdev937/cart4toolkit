@@ -30,7 +30,7 @@ export const Modal = (): React.ReactPortal => {
                 </section>
             </aside>
         </main>,
-        document.getElementById("modal")!
+        document.getElementById("modal") as HTMLElement
     );
 };
 

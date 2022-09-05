@@ -7,8 +7,8 @@ import { CartActions, getCartItems } from "../global/CartSlice";
 
 export const Main = (): JSX.Element => {
     const dispatch = useAppDispatch();
-    const { error, isLoading, cartItems } = 
-    useAppSelector((state) => state.cart);
+    const { error, isLoading, cartItems, amount, total } = 
+        useAppSelector((state) => state.cart);
     const { isOpen } = useAppSelector((state) => state.modal);
 
     React.useEffect(() => {
@@ -24,9 +24,11 @@ export const Main = (): JSX.Element => {
 
     return (
         <React.Fragment>
-            {isOpen && <Modal />}
             <Navbar />
-            <CartContainer />
+            {isOpen && <Modal />}
+            <CartContainer 
+                
+            />
         </React.Fragment>
     );
 };

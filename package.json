@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/indigomx9/cart4toolkit.git"
   },
-  "keywords": [],
+  "keywords": ["Webpack", "TypeScript", "FetchAPI", "React", "Redux-Toolkit"],
   "author": "",
   "license": "ISC",
   "bugs": {

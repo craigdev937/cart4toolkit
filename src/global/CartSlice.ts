@@ -29,20 +29,17 @@ const CartSlice = createSlice({
             state.cartItems = []
         },
         removeItem: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
             state.cartItems = state.cartItems.filter(
-                (item) => item.id !== id);
+                (item) => item.id !== action.payload);
         },
         decrease: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
             const cartItem = state.cartItems.find(
-                (item) => item.id === id);
+                (item) => item.id === action.payload);
             cartItem!.amount = cartItem!.amount - 1;
         },
         increase: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
             const cartItem = state.cartItems.find(
-                (item) => item.id === id);
+                (item) => item.id === action.payload);
             cartItem!.amount = cartItem!.amount + 1;
         },
         calculateTotals: (state) => {
@@ -57,13 +54,11 @@ const CartSlice = createSlice({
         },
     },
     extraReducers: {
-        [getCartItems.rejected.type]: 
-        (state, action) => {
+        [getCartItems.rejected.type]: (state, action) => {
             state.isLoading = false,
             state.error = action.payload
         },
-        [getCartItems.pending.toString()]: 
-        (state) => {
+        [getCartItems.pending.toString()]: (state) => {
             state.isLoading = true
         },
         [getCartItems.fulfilled.type]: 
